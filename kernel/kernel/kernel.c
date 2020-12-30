@@ -6,4 +6,7 @@ void kernel_main(void) {
     terminal_init();
     init_desc_tables();
     printf("Welcome to RaccoonOS\n");
+    printf("\n");
+    asm volatile ("int $0x3");
+    //asm volatile ("int $0x4");
 }
