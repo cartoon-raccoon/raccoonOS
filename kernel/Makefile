@@ -4,6 +4,7 @@ HOSTARCH!=../target-triplet-to-arch.sh $(HOST)
 
 CFLAGS?=-O2 -g
 CPPFLAGS?=
+ASFLAGS?=-felf
 LDFLAGS?=
 LIBS?=
 
@@ -30,6 +31,7 @@ LIBS:=$(LIBS) $(KERNEL_ARCH_LIBS)
 KERNEL_OBJS=\
 $(KERNEL_ARCH_OBJS) \
 kernel/kernel.o \
+kernel/desc_tables.o \
 
 OBJS=\
 $(ARCHDIR)/crti.o \
@@ -48,7 +50,7 @@ $(ARCHDIR)/crtend.o \
 $(ARCHDIR)/crtn.o \
 
 .PHONY: all clean install install-headers install-kernel
-.SUFFIXES: .o .c .S
+.SUFFIXES: .o .c .S .asm
 
 all: raccoonos.kernel
 
@@ -64,6 +66,9 @@ $(ARCHDIR)/crtbegin.o $(ARCHDIR)/crtend.o:
 
 .S.o:
 	$(CC) -MD -c $< -o $@ $(CFLAGS) $(CPPFLAGS)
+
+.asm.o:
+	nasm $(ASFLAGS) $<
 
 clean:
 	rm -f raccoonos.kernel
