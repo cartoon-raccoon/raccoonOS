@@ -5,6 +5,7 @@
 #include <string.h>
 
 #include <kernel/desc_tables.h>
+#include <kernel/serial.h>
 
 extern void gdt_flush(uint32_t);
 extern void idt_flush(uint32_t);
@@ -32,7 +33,7 @@ static void init_gdt() {
     gdt_set_gate(1, 0, 0xffffffff, 0x9a, 0xcf);  // code segment
     gdt_set_gate(2, 0, 0xffffffff, 0x92, 0xcf);  // data segment
     gdt_set_gate(3, 0, 0xffffffff, 0xfa, 0xcf);  // user mode code segment
-    gdt_set_gate(4, 0, 0xFFFFFFFF, 0xF2, 0xCF);  // user mode data segnent
+    gdt_set_gate(4, 0, 0xffffffff, 0xf2, 0xcf);  // user mode data segnent
 
     gdt_flush((uint32_t) &gdt_ptr);
 }
@@ -93,7 +94,7 @@ static void init_idt() {
 
 static void idt_set_gate(uint8_t num, uint32_t base, uint16_t sel, uint8_t flags) {
     idt_entries[num].base_lo = base & 0xffff;
-    idt_entries[num].base_hi = (base >> 16) & 0xffff;
+    idt_entries[num].base_hi = (base >> 16) >> 0xffff;
 
     idt_entries[num].sel     = sel;
     idt_entries[num].always0 = 0;

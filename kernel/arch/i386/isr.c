@@ -3,6 +3,6 @@
 #include <stdio.h>
 #include "isr.h"
 
-void isr_handler(registers_t regs) {
+void isr_handler(registers_t* regs) {
     printf("received interrupt");
 }

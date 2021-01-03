@@ -52,27 +52,41 @@ ISR_NO_ERRCODE 31
 extern isr_handler
 
 isr_common_stub:
+    ;push all registers
     pusha
 
-    mov ax, ds
-    push eax
+    ;save segment registers
+    push ds
+    push es
+    push fs
+    push gs
 
     mov ax, 0x10
     mov ds, ax
     mov es, ax
     mov fs, ax
     mov gs, ax
+    cld
 
+    push esp
+
+    ;call c handler fn
     call isr_handler
 
-    pop ebx
-    mov ds, bx
-    mov es, bx
-    mov fs, bx
-    mov gs, bx
+    ;remove pointer from stack
+    add esp, 4
 
+    ;restore registers
+    pop gs
+    pop fs
+    pop es
+    pop ds
+
+    ;restore all
     popa
 
+    ;remove the earlier bytes popped by stubs
     add esp, 8
-    sti
+
+    ;interrupt return
     iret
