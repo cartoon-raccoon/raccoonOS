@@ -1,7 +1,5 @@
 ;------GDT functions------
-
-[GLOBAL gdt_flush]
-
+global gdt_flush
 gdt_flush:
    mov eax, [esp+4]  ; Get the pointer to the GDT, passed as a parameter.
    lgdt [eax]        ; Load the new GDT pointer
@@ -19,7 +17,7 @@ gdt_flush:
 
 ;------IDT Functions------
 
-[GLOBAL idt_flush]
+global idt_flush
 idt_flush:
     mov eax, [esp+4] ; Get the pointer to the IDT
     lidt [eax]       ; Load the IDT
