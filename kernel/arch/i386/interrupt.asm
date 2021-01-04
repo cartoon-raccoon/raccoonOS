@@ -88,5 +88,7 @@ isr_common_stub:
     ;remove the earlier bytes popped by stubs
     add esp, 8
 
+    sti
+
     ;interrupt return
     iret
