@@ -34,23 +34,22 @@ $(KERNEL_ARCH_OBJS) \
 kernel.o \
 
 OBJS=\
-$(ARCHDIR)/crti.o \
-$(ARCHDIR)/crtbegin.o \
+$(ARCHDIR)/crti.asm.o \
+$(ARCHDIR)/crtn.asm.o \
 $(KERNEL_OBJS) \
 $(ARCHDIR)/crtend.o \
-$(ARCHDIR)/crtn.o \
+$(ARCHDIR)/crtbegin.o \
 
 LINK_LIST=\
 $(LDFLAGS) \
-$(ARCHDIR)/crti.o \
+$(ARCHDIR)/crti.asm.o \
 $(ARCHDIR)/crtbegin.o \
 $(KERNEL_OBJS) \
 $(LIBS) \
 $(ARCHDIR)/crtend.o \
-$(ARCHDIR)/crtn.o \
+$(ARCHDIR)/crtn.asm.o \
 
 .PHONY: all clean install install-headers install-kernel
-.SUFFIXES: .o .c .S .asm
 
 all: raccoonos.kernel
 
@@ -61,13 +60,13 @@ raccoonos.kernel: $(OBJS) $(ARCHDIR)/linker.ld
 $(ARCHDIR)/crtbegin.o $(ARCHDIR)/crtend.o:
 	OBJ=`$(CC) $(CFLAGS) $(LDFLAGS) -print-file-name=$(@F)` && cp "$$OBJ" $@
 
-.c.o:
+%.o: %.c
 	$(CC) -MD -c $< -o $@ -std=gnu11 $(CFLAGS) $(CPPFLAGS)
 
-.S.o:
+%.S.o: %.S
 	$(CC) -MD -c $< -o $@ $(CFLAGS) $(CPPFLAGS)
 
-.asm.o:
+%.asm.o: %.asm
 	nasm $(ASFLAGS) $< -o $@
 
 clean:
