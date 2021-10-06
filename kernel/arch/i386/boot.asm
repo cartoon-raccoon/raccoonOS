@@ -21,14 +21,14 @@ section .text
 global _start
  
 extern _init
-extern kernel_main
+extern kernel_init
  
 _start:
     mov esp, stack_top
  
     call _init
  
-    call kernel_main
+    call kernel_init
     cli
 .1: hlt
     jmp .1
