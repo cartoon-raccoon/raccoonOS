@@ -1,5 +1,5 @@
 #!/bin/sh
 set -e
-. ./iso.sh
+. ./scripts/iso.sh
 
-qemu-system-$(./target-triplet-to-arch.sh $HOST) -cdrom raccoonos.iso
+qemu-system-$(./scripts/target-triplet-to-arch.sh $HOST) -cdrom raccoonos.iso
