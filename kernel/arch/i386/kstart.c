@@ -1,7 +1,7 @@
 #include <kernel.h>
 #include <string.h>
 
-#include "gdt.h"
+#include "gdt/gdt.h"
 
 //! Remove the -1 from TOTAL_GDT_SEGMENTS - 1 after adding tss
 struct gdt_structured structured_gdt[TOTAL_GDT_SEGMENTS - 1] = {

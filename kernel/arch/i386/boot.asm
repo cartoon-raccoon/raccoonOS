@@ -24,6 +24,7 @@ extern _init
 extern kernel_init
  
 _start:
+    cli
     mov esp, stack_top
  
     call _init
