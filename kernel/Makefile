@@ -1,6 +1,7 @@
-DEFAULT_HOST!=../default-host.sh
+DEFAULT_HOST!=../scripts/default-host.sh
 HOST?=DEFAULT_HOST
-HOSTARCH!=../target-triplet-to-arch.sh $(HOST)
+HOSTARCH!=../scripts/target-triplet-to-arch.sh $(HOST)
+PWD?=$(shell pwd)
 
 CFLAGS?=-O2 -g
 CPPFLAGS?=
@@ -80,6 +81,7 @@ install: install-headers install-kernel
 install-headers:
 	mkdir -p $(DESTDIR)$(INCLUDEDIR)
 	cp -R --preserve=timestamps include/. $(DESTDIR)$(INCLUDEDIR)/.
+	cp -R --preserve=timestamps arch/$(HOSTARCH)/include/. $(DESTDIR)$(INCLUDEDIR)/kernel/.
 
 install-kernel: raccoonos.kernel
 	mkdir -p $(DESTDIR)$(BOOTDIR)
