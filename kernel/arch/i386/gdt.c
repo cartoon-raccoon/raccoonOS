@@ -32,7 +32,7 @@ void gdt_encode_entry(uint8_t* target, struct gdt_structured source)
 
 }
 
-void gdt_structured_to_gdt(struct gdt* gdt, struct gdt_structured* structured_gdt, int total_entries)
+void gdt_structured_to_gdt(struct gdt_entry* gdt, struct gdt_structured* structured_gdt, int total_entries)
 {
     for (int i = 0; i < total_entries; i++)
     {

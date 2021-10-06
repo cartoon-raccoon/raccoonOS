@@ -45,7 +45,9 @@
                      SEG_LONG(0)     | SEG_SIZE(1) | SEG_GRAN(1) | \
                      SEG_PRIV(3)     | SEG_DATA_RDWR
 
-struct gdt
+#define TOTAL_GDT_SEGMENTS 6
+
+struct gdt_entry
 {
     uint16_t segment;
     uint16_t base_first;
@@ -63,7 +65,7 @@ struct gdt_structured
 };
 
 void gdt_encode_entry(uint8_t *target, struct gdt_structured source);
-void gdt_structured_to_gdt(struct gdt* gdt, struct gdt_structured* structured_gdt, int total_entries);
-extern void gdt_load(struct gdt* gdt, int size);
+void gdt_structured_to_gdt(struct gdt_entry* gdt, struct gdt_structured* structured_gdt, int total_entries);
+extern void gdt_load(struct gdt_entry* gdt, int size);
 
 #endif
