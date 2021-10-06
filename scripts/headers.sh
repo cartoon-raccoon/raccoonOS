@@ -1,7 +1,7 @@
 #!/bin/sh
 
 set -e
-. ./config.sh
+. ./scripts/config.sh
 
 mkdir -p "$SYSROOT"
 
