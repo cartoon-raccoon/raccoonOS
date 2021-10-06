@@ -4,7 +4,7 @@ HOSTARCH!=../target-triplet-to-arch.sh $(HOST)
 
 CFLAGS?=-O2 -g
 CPPFLAGS?=
-ASFLAGS?=-felf
+ASFLAGS?=-felf32
 LDFLAGS?=
 LIBS?=
 
@@ -68,7 +68,7 @@ $(ARCHDIR)/crtbegin.o $(ARCHDIR)/crtend.o:
 	$(CC) -MD -c $< -o $@ $(CFLAGS) $(CPPFLAGS)
 
 .asm.o:
-	nasm $(ASFLAGS) $<
+	nasm $(ASFLAGS) $< -o $@
 
 clean:
 	rm -f raccoonos.kernel
