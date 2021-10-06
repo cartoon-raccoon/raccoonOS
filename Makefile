@@ -4,5 +4,8 @@ build:
 run:
 	./scripts/run.sh
 
+debug:
+	./scripts/run.sh -d
+
 clean:
 	./scripts/clean.sh
