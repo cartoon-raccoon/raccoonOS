@@ -5,6 +5,18 @@ gdt_load:
     mov ax, [esp+8]
     mov [gdt_descriptor], ax
     lgdt [gdt_descriptor]
+
+    jmp 0x08:.reload_cs
+
+.reload_cs:
+
+    mov ax, 0x10
+    mov ds, ax
+    mov es, ax
+    mov fs, ax
+    mov gs, ax
+    mov ss, ax
+
     ret
 
 
