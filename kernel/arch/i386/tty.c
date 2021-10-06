@@ -5,8 +5,7 @@
 
 #include <kernel/tty.h>
 #include <kernel/serial.h>
-
-#include "vga.h"
+#include <kernel/vga.h>
 
 // #if defined(__linux__)
 // #error "i686 cross compiler not being used"
