@@ -27,3 +27,8 @@ uint16_t inw(uint16_t port)
     asm volatile ("inw %1, %0" : "=a" (ret) : "dN" (port));
     return ret;
 }
+
+void io_wait(void)
+{
+    outb(0x80, 0);
+}
