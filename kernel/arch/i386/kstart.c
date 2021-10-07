@@ -2,6 +2,7 @@
 #include <string.h>
 
 #include <kernel/tty.h>
+#include <kernel/log.h>
 
 #include "gdt/gdt.h"
 #include "idt/idt.h"
@@ -15,10 +16,13 @@ void kernel_init(void)
 
     // initialize global desc table
     gdt_init();
+    kernel_log("Initialized GDT\n");
 
     // initialize interrupt desc table
     idt_init();
+    kernel_log("Initialized IDT\n");
 
     // call generic kernel main
+    kernel_log("Calling kernel main\n");
     kernel_main();
 }
