@@ -1,4 +1,5 @@
 *.o
 sysroot
 isodir
+*.log
 *.iso
