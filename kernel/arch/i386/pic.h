@@ -46,6 +46,18 @@ So, when IRQ line 1 is raised (keyboard PS/2 interrupt),
 instead of calling ISR1 (which is reserved for debug
 exceptions), we will call ISR 0x20+1 = 0x21.
 */
+
+// Remap the PIC's IRQ lines to the given offsets.
 void pic_remap(uint8_t offset1, uint8_t offset2);
+
+// Sets the corresponding bit in the IRQ mask register.
+// When the bit is set, the IRQ is ignored when the pin
+// is raised and the CPU does not receive interrupts.
+void pic_set_irq_mask(uint8_t irqline);
+
+// Clears the corresponding bit in the IRQ mask register.
+// Similarly, when the bit is clear, IRQs will be received
+// by the CPU again.
+void pic_clr_irq_mask(uint8_t irqline);
 
 #endif

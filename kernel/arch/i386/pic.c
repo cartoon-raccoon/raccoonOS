@@ -32,3 +32,39 @@ void pic_remap(uint8_t offset1, uint8_t offset2)
     outb(PIC1_DATA, mr_pic1);
     outb(PIC2_DATA, mr_pic2);
 }
+
+void pic_set_irq_mask(uint8_t irqline)
+{
+    uint16_t port;
+    uint8_t value;
+
+    if (irqline < 8)
+    {
+        port = PIC1_DATA;
+    } else
+    {
+        port = PIC2_DATA;
+        irqline -= 8;
+    }
+
+    value = inb(port) | (1 << irqline);
+    outb(port, value);
+}
+
+void pic_clr_irq_mask(uint8_t irqline)
+{
+    uint16_t port;
+    uint8_t value;
+
+    if (irqline < 8)
+    {
+        port = PIC1_DATA;
+    } else
+    {
+        port = PIC2_DATA;
+        irqline -= 8;
+    }
+
+    value = inb(port) & ~(1 << irqline);
+    outb(port, value);
+}
