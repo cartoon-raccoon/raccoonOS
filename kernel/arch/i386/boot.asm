@@ -24,12 +24,12 @@ extern _init
 extern kernel_init
  
 _start:
-    cli
     mov esp, stack_top
  
     call _init
  
     call kernel_init
+
     cli
 .1: hlt
     jmp .1

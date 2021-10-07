@@ -1,7 +1,10 @@
 #include <kernel.h>
 #include <string.h>
 
+#include <kernel/tty.h>
+
 #include "gdt/gdt.h"
+#include "idt/idt.h"
 
 //! Remove the -1 from TOTAL_GDT_SEGMENTS - 1 after adding tss
 struct gdt_structured structured_gdt[TOTAL_GDT_SEGMENTS - 1] = {
@@ -17,7 +20,9 @@ struct gdt_entry gdt[TOTAL_GDT_SEGMENTS - 1];
 
 // todo: pass multiboot info struct to it
 void kernel_init(void) {
-    //todo: set up gdt, idt, etc etc
+
+    terminal_init();
+    //todo: set up gdt, idt, tss, paging etc etc
 
     // zero out gdt memory
     memset(gdt, 0x00, sizeof(gdt));
@@ -25,6 +30,9 @@ void kernel_init(void) {
     // encode the gdt and load it
     gdt_structured_to_gdt(gdt, structured_gdt, TOTAL_GDT_SEGMENTS - 1);
     gdt_load(gdt, sizeof(gdt));
+
+    // initialize interrupt desc table
+    idt_init();
 
     // call generic kernel main
     kernel_main();
