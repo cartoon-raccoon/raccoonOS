@@ -11,13 +11,15 @@ struct idt_ptr idtr_desc;
 extern void idt_load(struct idt_ptr *ptr);
 
 static void idt_zero();
-static void idt_zero() {
+static void idt_zero()
+{
     printf("Divide by zero!\n");
     asm volatile("pop %eax");
     //asm volatile("hlt");
 }
 
-void idt_set(int interrupt, void *addr) {
+void idt_set(int interrupt, void *addr)
+{
     struct idt_entry *desc = &idt[interrupt];
 
     desc->offset_low = (uint32_t) addr & 0x0000ffff;
@@ -27,7 +29,8 @@ void idt_set(int interrupt, void *addr) {
     desc->offset_hi = (uint32_t) addr >> 16;
 }
 
-void idt_init(void) {
+void idt_init(void)
+{
     memset(idt, 0x0, sizeof(idt));
 
     idtr_desc.limit = sizeof(idt) - 1;
