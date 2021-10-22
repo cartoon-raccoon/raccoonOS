@@ -5,6 +5,8 @@
 
 #define IDT_SIZE 256
 
+#define EXCEPT_ISR_COUNT 32
+
 #define KERNEL_CS 0x08
 #define KERNEL_DS 0x10
 
@@ -26,6 +28,13 @@ struct idt_ptr
 typedef struct idt_entry idt_entry_t;
 typedef struct idt_ptr   idt_ptr_t;
 
+// isr function pointer
+typedef void (*isr)(void);
+
 void idt_init(void);
+void idt_set_entry(int interrupt, isr addr);
+
+void enable_irqs(void);
+void disable_irqs(void);
 
 #endif
