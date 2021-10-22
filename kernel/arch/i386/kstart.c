@@ -24,6 +24,8 @@ void kernel_init(void)
     kernel_log("Initialized IDT\n");
 
     terminal_init();
+
+    asm volatile ("int $0x1");
     // call generic kernel main
     kernel_log("Calling kernel main\n");
     kernel_main();
