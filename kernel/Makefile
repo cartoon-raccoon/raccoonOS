@@ -5,7 +5,7 @@ PWD?=$(shell pwd)
 
 CFLAGS?=-O2 -g
 CPPFLAGS?=
-ASFLAGS?=-felf32
+ASFLAGS?=-felf32 -g
 LDFLAGS?=
 LIBS?=
 
