@@ -1,0 +1,19 @@
+diff '--color=auto' --recursive -u --new-file gcc-15.2.0/gcc/config/i386/t-x86_64-elf gcc-15.2.0-copy/gcc/config/i386/t-x86_64-elf
+--- gcc-15.2.0/gcc/config/i386/t-x86_64-elf	1969-12-31 19:00:00.000000000 -0500
++++ gcc-15.2.0/gcc/config/i386/t-x86_64-elf	2026-04-06 18:26:32.064659233 -0400
+@@ -0,0 +1,4 @@
++# Add libgcc multilib variant without red-zone requirement
++
++MULTILIB_OPTIONS += mno-red-zone
++MULTILIB_DIRNAMES += no-red-zone
+diff '--color=auto' --recursive -u --new-file gcc-15.2.0/gcc/config.gcc gcc-15.2.0-copy/gcc/config.gcc
+--- gcc-15.2.0/gcc/config.gcc	2025-08-08 02:51:40.435347488 -0400
++++ gcc-15.2.0/gcc/config.gcc	2026-04-06 18:23:08.382840885 -0400
+@@ -1960,6 +1960,7 @@
+ 	tm_file="${tm_file} i386/unix.h i386/att.h elfos.h newlib-stdint.h i386/i386elf.h"
+ 	;;
+ x86_64-*-elf*)
++	tmake_file="${tmake_file} i386/t-x86_64-elf" # include the new multilib configuration
+ 	tm_file="${tm_file} i386/unix.h i386/att.h elfos.h newlib-stdint.h i386/i386elf.h i386/x86-64.h"
+ 	;;
+ x86_64-*-rtems*)

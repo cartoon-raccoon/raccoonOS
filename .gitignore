@@ -1,5 +1,13 @@
 *.o
-sysroot
-isodir
+
+build/sysroot
+build/isodir
+build/binutils-*
+build/gcc-*
+build/build-binutils*
+build/build-gcc*
+build/toolchain-exists
+build/cross
+
 *.log
 *.iso
