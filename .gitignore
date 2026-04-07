@@ -8,6 +8,9 @@ build/build-binutils*
 build/build-gcc*
 build/toolchain-exists
 build/cross
+build/raccoonOS
+
+sysroot/
 
 *.log
 *.iso
