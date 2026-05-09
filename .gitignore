@@ -1,14 +1,13 @@
 *.o
 
-build/sysroot
-build/isodir
-build/binutils-*
-build/gcc-*
-build/build-binutils*
-build/build-gcc*
-build/toolchain-exists
-build/cross
-build/raccoonOS
+build/
+meta/binutils-*
+meta/gcc-*
+meta/build-binutils*
+meta/build-gcc*
+meta/toolchain-exists
+meta/cross
+meta/raccoonOS
 
 sysroot/
 
